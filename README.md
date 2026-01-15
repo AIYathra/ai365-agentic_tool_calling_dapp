@@ -5,19 +5,29 @@ A minimal, educational agentic demo showcasing dynamic tool discovery, LLM‑dri
 ```
 
     subgraph User
-        A[User Query]
+        A[ User Query ]
     end
 
     subgraph Core
-        B[Prompt Builder<br/>• Builds system prompt<br/>• Lists tools & signatures]
-        C[LLM Client<br/>• Sends prompt to LLM<br/>• Receives tool-call text]
-        D[Parser<br/>• Extracts function name<br/>• Parses parameters safely]
-        E[Executor<br/>• Runs Python function<br/>• Returns result]
+        B[ Prompt Builder
+            • Builds system prompt
+            • Lists tools & signatures ]
+        C[ LLM Client
+            • Sends prompt to LLM
+            • Receives tool-call text ]
+        D[ Parser
+            • Extracts function name
+            • Parses parameters safely ]
+        E[ Executor
+            • Runs Python function
+            • Returns result ]
     end
 
     subgraph Tools
-        F[Math Tools<br/>plus/minus/multiply/divide/power/modulo]
-        G[Future Tools<br/>string_tools, web_tools, rag_tools]
+        F[ Math Tools
+            plus/minus/multiply/divide/power/modulo ]
+        G[ Future Tools
+            string_tools, web_tools, rag_tools ]
     end
 
     A --> B --> C --> D --> E
