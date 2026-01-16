@@ -20,7 +20,8 @@ def run(query: str):
     print(f"Q: {query}\nTool call: {fn} {params}\nResult: {result}\n")
 
 if __name__ == "__main__":
-    run("uppercase 'hello world'")
+    run("to_uppercase 'hello world'")
+    run("to_lower 'OpenAI Copilot'")
     run("length 'OpenAI Copilot'")
     run("concat 'foo' and 'bar'")
     run("concat 'foo' and 'bar' with sep '-'")

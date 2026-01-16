@@ -11,3 +11,8 @@ def to_lower(text: str) -> str:
 def concat(a: str, b: str, separator: str = " ") -> str:
     """Concatenate two strings with an optional separator."""
     return f"{a}{separator}{b}"
+
+
+def length(text: str) -> int:
+    """Return the length of the given text."""
+    return len(text)

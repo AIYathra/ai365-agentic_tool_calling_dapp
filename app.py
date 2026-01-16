@@ -13,7 +13,7 @@ def main():
         user_query = " ".join(sys.argv[1:])
     else:
         user_query = input("Enter your query: ")
-   
+
     # 2. Load available tools
     tools = get_tool_registry()
 
