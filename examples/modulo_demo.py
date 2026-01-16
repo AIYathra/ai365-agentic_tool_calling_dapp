@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+
+# Add parent directory to path to enable core module imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from core.llm_client import call_llm_for_tool_call
 from core.parser import parse_tool_call
 from core.executor import execute_tool_call
