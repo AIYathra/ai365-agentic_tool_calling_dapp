@@ -1,5 +1,10 @@
 # ai365-agentic_tool_calling_dapp
-A minimal, educational agentic demo showcasing dynamic tool discovery, LLM‑driven function calling, safe parameter parsing, and Python tool execution. Designed as a clean foundation for understanding agentic reasoning and building more advanced AI workflows.
+A minimal, educational agentic demo showcasing dynamic tool discovery, LLM‑driven function calling, safe parameter parsing, and Python tool execution.  
+Now fully integrated with **Groq** for real LLM-powered tool-calling.
+
+This project is intentionally simple, transparent, and modular — ideal for learning, teaching, and extending into more advanced agentic systems.
+
+
 
 ## Architecture
 ```
@@ -13,8 +18,8 @@ A minimal, educational agentic demo showcasing dynamic tool discovery, LLM‑dri
             • Builds system prompt
             • Lists tools & signatures ]
         C[ LLM Client
-            • Sends prompt to LLM
-            • Receives tool-call text ]
+            • Dummy mode (offline)
+            • Groq mode (real LLM) ]
         D[ Parser
             • Extracts function name
             • Parses parameters safely ]
@@ -26,8 +31,8 @@ A minimal, educational agentic demo showcasing dynamic tool discovery, LLM‑dri
     subgraph Tools
         F[ Math Tools
             plus/minus/multiply/divide/power/modulo ]
-        G[ Future Tools
-            string_tools, web_tools, rag_tools ]
+        G[ String Tools
+            to_upper/to_lower/concat ]
     end
 
     A --> B --> C --> D --> E
@@ -38,6 +43,8 @@ A minimal, educational agentic demo showcasing dynamic tool discovery, LLM‑dri
 
 ```
 
+
+
 ## Runtime Flow
 ```
 
@@ -46,7 +53,7 @@ sequenceDiagram
 
     participant U as User
     participant PB as Prompt Builder
-    participant LLM as LLM Interface
+    participant LLM as LLM Interface (Groq or Dummy)
     participant P as Tool‑Call Parser
     participant EX as Executor
     participant T as Tools (Python Functions)
@@ -62,40 +69,94 @@ sequenceDiagram
 
 ```
 
+
+
 ## Folder Structure
 ```
 
 ai365-agentic_tool_calling_dapp/
 │
 ├── tools/
-│   ├── math_tools.py
-│   ├── string_tools.py        # optional future extension
+│   ├── math_tools.py           # arithmetic tools
+│   ├── string_tools.py         # text manipulation tools
 │   └── __init__.py
 │
 ├── core/
-│   ├── tool_registry.py       # auto-detect functions + signatures + docs
-│   ├── prompt_builder.py      # builds system prompt dynamically
-│   ├── llm_client.py          # Groq/OpenAI client wrapper
-│   ├── parser.py              # parses "fn - {params}" safely
-│   └── executor.py            # executes the selected tool
+│   ├── tool_registry.py        # auto-detects tools dynamically
+│   ├── prompt_builder.py       # builds system prompt
+│   ├── llm_client.py           # dummy + Groq integration
+│   ├── parser.py               # safe tool-call parsing
+│   └── executor.py             # executes selected tool
 │
 ├── examples/
-│   ├── simple_math_demo.py    # equivalent to your gist #2
-│   ├── power_demo.py          # equivalent to gist #1
+│   ├── simple_math_demo.py
+│   ├── power_demo.py
 │   └── modulo_demo.py
 │
-├── app.py                     # main CLI entry point
+├── app.py                      # CLI entry point
 ├── README.md
 └── requirements.txt
 
 ```
 
+
+
+## LLM Integration
+
+### **Dummy Mode (default)**  
+Offline, deterministic, no API keys needed.
+
+```
+export LLM_PROVIDER=dummy
+```
+
+### **Groq Mode (real LLM)**  
+Uses `llama-3.1-8b-instant` for fast, accurate tool-calling.
+
+```
+export LLM_PROVIDER=groq
+export GROQ_API_KEY="your_groq_api_key_here"
+```
+
+
+
 ## How It Works
-[explanation]
+
+1. User sends a natural language query.  
+2. Prompt builder constructs a system prompt listing all tools.  
+3. LLM returns a strict tool‑call string:  
+   ```
+   power - {'a': 2, 'b': 8}
+   ```
+4. Parser safely extracts the function + parameters.  
+5. Executor runs the correct Python function.  
+6. Result is returned to the user.  
+
+This mirrors how modern agent frameworks (LangChain, CrewAI, MCP, PydanticAI) implement tool-calling — but in a minimal, transparent way.
+
+
 
 ## Design Goals
-- ✅ Minimal and educational
-- 🔍 Transparent tool-calling flow
-- 🧠 Agentic reasoning foundation
-- 🔧 Easily extensible with new tools
-- 🛡️ Safe parameter parsing (no eval)
+
+- ✅ Minimal and educational  
+- 🔍 Transparent tool-calling flow  
+- 🧠 Agentic reasoning foundation  
+- 🔧 Easily extensible with new tools  
+- 🛡️ Safe parameter parsing (no eval)  
+- ⚡ Real LLM integration via Groq  
+- 🧩 Clean modular architecture  
+
+
+
+## Next Steps (Roadmap)
+
+- Multi-step agentic reasoning  
+- RAG tools  
+- Web tools  
+- File tools  
+- Logging & tracing  
+- Web UI (FastAPI + HTMX)  
+- Unit tests  
+
+
+
