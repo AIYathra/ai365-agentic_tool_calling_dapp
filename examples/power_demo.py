@@ -11,7 +11,7 @@ from core.prompt_builder import build_system_prompt
 
 
 def run_power_demo():
-    user_query = "Calculate 2 to the power of 8."
+    user_query = "Calculate 2 to the power of eight"
     tools = get_tool_registry()
     system_prompt = build_system_prompt(tools)
 
