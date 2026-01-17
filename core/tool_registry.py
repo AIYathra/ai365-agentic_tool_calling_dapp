@@ -1,7 +1,7 @@
 import inspect
 from typing import Callable, Dict
 
-from tools import math_tools, string_tools
+from tools import math_tools, string_tools, date_tools
 
 
 def _collect_functions(module) -> Dict[str, Callable]:
@@ -21,4 +21,5 @@ def get_tool_registry() -> Dict[str, Callable]:
     registry: Dict[str, Callable] = {}
     registry.update(_collect_functions(math_tools))
     registry.update(_collect_functions(string_tools))
+    registry.update(_collect_functions(date_tools))
     return registry

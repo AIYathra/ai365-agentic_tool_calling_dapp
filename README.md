@@ -148,6 +148,48 @@ This mirrors how modern agent frameworks (LangChain, CrewAI, MCP, PydanticAI) im
 
 
 
+## 🧰 Adding New Tools
+
+Adding new tools is intentionally simple.  
+Any Python function placed inside the `tools/` directory is **automatically discovered**, documented, and exposed to the LLM — no manual registration required.
+
+### 1. Create a new tool module
+Example:
+```
+tools/date_tools.py
+```
+
+### 2. Add functions with clear docstrings
+Docstrings become part of the system prompt, teaching the LLM how to use your tool.
+
+```python
+import datetime
+
+def current_year() -> int:
+    """Return the current year."""
+    return datetime.datetime.now().year
+
+
+def days_between(date1: str, date2: str) -> int:
+    """Return number of days between two YYYY-MM-DD dates."""
+    d1 = datetime.strptime(date1, "%Y-%m-%d")
+    d2 = datetime.strptime(date2, "%Y-%m-%d")
+    return abs((date2 - date1).days)
+```
+import in <b>tool_registry</b>:
+```python
+from tools import math_tools, string_tools, date_tools
+```
+
+### 3. That’s it — no registration needed
+Your new tools will automatically appear in:
+
+- the tool registry
+- the system prompt
+- the LLM’s available tool list
+
+
+
 ## Next Steps (Roadmap)
 
 - Multi-step agentic reasoning  
