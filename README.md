@@ -1,16 +1,23 @@
 # 🤖 AI Agentic Tool Calling System
 
-A lightweight, educational framework for building AI agents that can intelligently select and execute tools based on natural language queries. This project demonstrates the fundamentals of agentic AI systems using function calling with LLMs.
+**Note:** "dapp" here means demo app, not decentralized app.
+
+A lightweight, educational framework for building AI agents that can intelligently select and execute tools based on natural language queries. This project demonstrates the fundamentals of agentic reasoning.
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Status](https://img.shields.io/badge/status-active-success.svg)
+
+### For Recruiters
+
+This project demonstrates core agentic AI concepts in a minimal, intentionally clean architecture. It highlights dynamic tool discovery, structured function calling, safe execution, and a zero‑friction dual‑mode design (Dummy Mode + Groq Mode). The repo is optimized for readability and educational clarity rather than feature completeness.
 
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
 - [Features](#-features)
 - [Architecture](#-architecture)
+- [Design Decisions](#-design-decisions)
 - [Installation](#-installation)
 - [Quick Start](#-quick-start)
 - [Configuration](#-configuration)
@@ -20,6 +27,7 @@ A lightweight, educational framework for building AI agents that can intelligent
 - [How It Works](#-how-it-works)
 - [Available Tools](#-available-tools)
 - [Limitations](#-limitations)
+- [Possible Extensions (Not Planned)](#-possible-extensions-not-planned)
 - [Roadmap](#-roadmap)
 - [Contributing](#-contributing)
 - [License](#-license)
@@ -86,6 +94,15 @@ The system supports two modes:
 │     Result      │
 └─────────────────┘
 ```
+
+## 🎨 Design Decisions
+
+This project prioritizes **clarity and educational value** through several deliberate architectural choices:
+
+- **Dual‑mode design** (Dummy Mode + Groq Mode) reduces friction for recruiters and enables instant execution without API keys.
+- **Dynamic tool discovery** using Python introspection instead of manual tool registration keeps the codebase DRY and scalable.
+- **Minimal, intentionally educational architecture** designed to teach agentic tool-calling fundamentals without overwhelming complexity.
+- **Clear separation** between LLM reasoning, tool registry, and execution pipeline for maintainability and testability.
 
 ## 🚀 Installation
 
@@ -463,6 +480,17 @@ def get_tool_registry() -> Dict[str, Callable]:
 ### Future Improvements
 
 See [Roadmap](#roadmap) for planned enhancements.
+
+## 🚀 Possible Extensions (Not Planned)
+
+These are conceptual directions showing how the architecture could evolve. I do not plan to implement them due to time constraints.
+
+- Multi-step tool calling (agent loops with intermediate results)
+- Conversation memory and context management
+- Retry logic and error recovery mechanisms
+- Tool chaining (composing multiple tools in sequence)
+- Observability/logging for debugging and monitoring
+- Optional UI layer (Streamlit, Gradio, or web interface)
 
 ## 🗺️ Roadmap
 
