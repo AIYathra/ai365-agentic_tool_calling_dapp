@@ -1,12 +1,11 @@
 # 🤖 AI Agentic Tool Calling System
-
-**Note:** "dapp" here means demo app, not decentralized app.
-
-A lightweight, educational framework for building AI agents that can intelligently select and execute tools based on natural language queries. This project demonstrates the fundamentals of agentic reasoning.
+A lightweight, educational framework for building AI agents that can intelligently select and execute tools based on natural language queries. This project demonstrates the fundamentals of agentic AI systems using function calling with LLMs.
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Status](https://img.shields.io/badge/status-active-success.svg)
+
+**Note:** "dapp" here means demo app, not decentralized app.
 
 ### For Recruiters
 
