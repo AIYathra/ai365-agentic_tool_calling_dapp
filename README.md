@@ -1,7 +1,7 @@
 # 🤖 AI Agentic Tool Calling System
 A lightweight, educational framework for building AI agents that can intelligently select and execute tools based on natural language queries. This project demonstrates the fundamentals of agentic AI systems using function calling with LLMs.
 
-![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
+![Python](https://img.shields.io/badge/python-3.12-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Status](https://img.shields.io/badge/status-active-success.svg)
 
@@ -107,8 +107,26 @@ This project prioritizes **clarity and educational value** through several delib
 
 ### Prerequisites
 
-- Python 3.8 or higher
-- pip (Python package manager)
+- [uv](https://docs.astral.sh/uv/getting-started/installation/) — the only thing you need installed; it manages the correct Python (3.12) automatically.
+
+  Install it (macOS / Linux):
+  ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+  ```
+    Windows (PowerShell):
+  ```powershell
+    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+  ```
+    Or via Homebrew / pipx / pip — see the [uv install guide](https://docs.astral.sh/uv/getting-started/installation/).
+
+  > **Don't want to use uv?** The project runs on standard tooling too:
+  > ```bash
+  > python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+  > pip install groq python-dotenv
+  > python app.py "What is 15 divided by 3?"
+  > ```
+  > uv is recommended because it pins the Python version and locks dependencies for you — but it's not required.
+
 - (Optional) Groq API key for production mode
 
 ### Step 1: Clone the Repository
@@ -118,28 +136,10 @@ git clone https://github.com/AIYathra/ai365-agentic_tool_calling_dapp.git
 cd ai365-agentic_tool_calling_dapp
 ```
 
-### Step 2: Create Virtual Environment (Recommended)
+### Step 2: Install Dependencies
 
 ```bash
-# On macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
-
-# On Windows
-python -m venv venv
-venv\Scripts\activate
-```
-
-### Step 3: Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-If `requirements.txt` doesn't exist, install manually:
-
-```bash
-pip install groq
+uv sync
 ```
 
 ## ⚡ Quick Start
@@ -153,7 +153,7 @@ Perfect for testing and learning!
 export LLM_PROVIDER=dummy
 
 # Run a demo
-python examples/power_demo.py
+uv run python examples/power_demo.py
 ```
 
 **Expected Output:**
@@ -183,14 +183,14 @@ export GROQ_API_KEY="gsk_your_actual_api_key_here"
 export LLM_PROVIDER=groq
 
 # Step 3: Run the main application
-python app.py "What is 15 divided by 3?"
+uv run python app.py "What is 15 divided by 3?"
 ```
 
 ### Interactive Mode
 
 ```bash
 # Run without arguments for interactive mode
-python app.py
+uv run python app.py
 
 # You'll be prompted:
 # Enter your query: What is the remainder when 100 is divided by 7?
@@ -227,22 +227,14 @@ $env:LLM_PROVIDER="groq"
 
 **Using .env file (recommended):**
 
-1. Create a `.env` file in the project root:
-```bash
+Create a `.env` file in the project root with your key:
+
+```
 GROQ_API_KEY=gsk_your_actual_key_here
 LLM_PROVIDER=groq
 ```
 
-2. Install python-dotenv:
-```bash
-pip install python-dotenv
-```
-
-3. Load in your code:
-```python
-from dotenv import load_dotenv
-load_dotenv()
-```
+python-dotenv is already a project dependency and `load_dotenv()` is already called at the top of `app.py` — no separate install or code change needed.
 
 ## 📖 Usage Examples
 
@@ -250,47 +242,47 @@ load_dotenv()
 
 ```bash
 # Test power calculations
-python examples/power_demo.py
+uv run python examples/power_demo.py
 
 # Test modulo operations
-python examples/modulo_demo.py
+uv run python examples/modulo_demo.py
 
 # Test multi-step math (shows limitations)
-python examples/simple_math_demo.py
+uv run python examples/simple_math_demo.py
 ```
 
 ### Using Command-Line Arguments
 
 ```bash
 # Single query
-python app.py "Calculate 5 to the power of 3"
+uv run python app.py "Calculate 5 to the power of 3"
 
 # Math operations
-python app.py "What is 1000 modulo 7?"
+uv run python app.py "What is 1000 modulo 7?"
 
 # String operations
-python app.py "Convert 'hello world' to uppercase"
+uv run python app.py "Convert 'hello world' to uppercase"
 
 # Division
-python app.py "Divide 100 by 4"
+uv run python app.py "Divide 100 by 4"
 ```
 
 ### Example Queries That Work
 
 **Math Operations:**
 ```bash
-python app.py "What is 2 to the power of 10?"
-python app.py "Find the remainder when 50 is divided by 7"
-python app.py "Add 25 and 17"
-python app.py "Multiply 6 by 9"
+uv run python app.py "What is 2 to the power of 10?"
+uv run python app.py "Find the remainder when 50 is divided by 7"
+uv run python app.py "Add 25 and 17"
+uv run python app.py "Multiply 6 by 9"
 ```
 
 **String Operations:**
 ```bash
-python app.py "Convert 'python' to uppercase"
-python app.py "Make 'HELLO' lowercase"
-python app.py "Combine 'Hello' and 'World'"
-python app.py "How long is 'artificial intelligence'?"
+uv run python app.py "Convert 'python' to uppercase"
+uv run python app.py "Make 'HELLO' lowercase"
+uv run python app.py "Combine 'Hello' and 'World'"
+uv run python app.py "How long is 'artificial intelligence'?"
 ```
 
 ## 📂 Project Structure
@@ -299,7 +291,9 @@ python app.py "How long is 'artificial intelligence'?"
 ai365-agentic_tool_calling_dapp/
 │
 ├── app.py                      # Main entry point
-├── requirements.txt             # Python dependencies
+├── pyproject.toml              # Project metadata & dependencies
+├── uv.lock                     # Locked dependency versions
+├── .python-version             # Pinned Python version (3.12)
 ├── README.md                    # This file
 │
 ├── core/                        # Core system modules
@@ -352,6 +346,10 @@ def factorial(n: int) -> int:
 
 ### Step 2: Test It
 
+```bash
+uv run python
+```
+
 ```python
 # Test in Python REPL
 from tools.math_tools import factorial
@@ -364,7 +362,7 @@ print(factorial(5))  # Output: 120
 That's it! The tool is **automatically discovered** and available to the AI.
 
 ```bash
-python app.py "What is the factorial of 5?"
+uv run python app.py "What is the factorial of 5?"
 # AI will respond: factorial - {'n': 5}
 # Result: 120
 ```
@@ -453,6 +451,13 @@ def get_tool_registry() -> Dict[str, Callable]:
 | `to_lower` | `text: str` | Convert to lowercase | `to_lower("WORLD")` → `"world"` |
 | `concat` | `a: str, b: str, separator: str = " "` | Join strings | `concat("Hello", "World")` → `"Hello World"` |
 | `length` | `text: str` | Get string length | `length("Python")` → `6` |
+
+### Date Tools (`tools/date_tools.py`)
+
+| Function | Parameters | Description | Example |
+|----------|-----------|-------------|---------|
+| `current_year` | _(none)_ | Returns the current year | `current_year()` → `2026` |
+| `days_between` | `date1: str, date2: str` | Days between two YYYY-MM-DD dates | `days_between("2026-01-01", "2026-06-17")` → `167` |
 
 ## ⚠️ Limitations
 
@@ -571,12 +576,14 @@ Want to learn more about agentic AI systems?
 **Issue: `ModuleNotFoundError: No module named 'groq'`**
 ```bash
 # Solution:
-pip install groq
+uv sync
 ```
 
 **Issue: `RuntimeError: GROQ_API_KEY environment variable is not set`**
 ```bash
-# Solution:
+# Solution: add to a .env file in the project root:
+GROQ_API_KEY=gsk_your_actual_key_here
+# or export directly in the terminal:
 export GROQ_API_KEY="your_api_key_here"
 ```
 

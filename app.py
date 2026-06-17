@@ -5,7 +5,8 @@ from core.parser import parse_tool_call
 from core.executor import execute_tool_call
 from core.tool_registry import get_tool_registry
 from core.prompt_builder import build_system_prompt
-
+from dotenv import load_dotenv
+load_dotenv()
 
 def main():
     # 1. Accept user input (CLI or interactive)
