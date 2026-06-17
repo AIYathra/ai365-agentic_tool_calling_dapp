@@ -110,21 +110,27 @@ This project prioritizes **clarity and educational value** through several delib
 - [uv](https://docs.astral.sh/uv/getting-started/installation/) — the only thing you need installed; it manages the correct Python (3.12) automatically.
 
   Install it (macOS / Linux):
-  ```bash
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-  ```
-    Windows (PowerShell):
-  ```powershell
-    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-  ```
-    Or via Homebrew / pipx / pip — see the [uv install guide](https://docs.astral.sh/uv/getting-started/installation/).
+
+```bash
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+  Windows (PowerShell):
+
+```powershell
+  powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+  Or via Homebrew / pipx / pip — see the [uv install guide](https://docs.astral.sh/uv/getting-started/installation/).
 
   > **Don't want to use uv?** The project runs on standard tooling too:
+  >
   > ```bash
   > python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
   > pip install groq python-dotenv
   > python app.py "What is 15 divided by 3?"
   > ```
+  >
   > uv is recommended because it pins the Python version and locks dependencies for you — but it's not required.
 
 - (Optional) Groq API key for production mode
@@ -306,6 +312,7 @@ ai365-agentic_tool_calling_dapp/
 │
 ├── tools/                       # Tool implementations
 │   ├── __init__.py
+│   ├── date_tools.py           # Date operations (2 functions)
 │   ├── math_tools.py           # Math operations (6 functions)
 │   └── string_tools.py         # String operations (4 functions)
 │
